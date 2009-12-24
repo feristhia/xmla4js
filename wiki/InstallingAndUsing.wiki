@@ -1,0 +1,30 @@
+#summary This page explains how to get started using xmla4js
+#labels Phase-Deploy
+
+= Introduction =
+
+Xmla.js is simply a javascript library. All it takes to start using it, is to create a web page, and use a <script> tag to include the Xmla.js library. 
+
+However, because Xmla.js uses HTTP requests to post SOAP requests (and receive SOAP responses) to a XML/A webservice, it is bound to the same origin policy. Effectively this means that webpages that want to use Xmla.js must reside on the same web server as where the XML/A webservice lives.
+
+The steps described on this page assume you have downloaded and unpacked the Pentaho BI server on your local system. You can download it from the Pentaho project page on sourceforge. The remainder of this page will assume that the Pentaho BI Server is started and has a default configuration. You can check this by navigating to http://localhost:8080/ with your webbrowser. This should redirect you to http://localhost:8080/pentaho, and show you the welcome page with a login button.
+
+For other XML/A providers, the steps to get started with xmla4js are almost certainly similar, although details such as specific paths and urls are likely to differ. You are encouraged to contribute feedback and information on how to set up Xmla.js on other XML/A servers.
+
+= Details =
+
+First, you need to checkout  open a shell and cd to the tomcat/webapps directory located in the home directory of the Pentaho BI server. Suppose you unpacked the compressed archive of the Pentaho BI server to /opt/pentaho, then you should cd to /opt/pentaho/biserver-ce/tomcat/webapps.
+
+In that directory, do a subversion checkout of the xmla4js google code project. The command line to checkout the project can be found here:
+
+    http://code.google.com/p/xmla4js/source/checkout
+
+For your convenience, the command-line is included here too:
+
+    svn checkout http://xmla4js.googlecode.com/svn/trunk/ xmla4js-read-only
+
+This will create a xmla4js-read-only directory in tomcat's webapps directory. After completing the checkout, you should be able to navigate your browser to:
+
+    http://localhost:8080/xmla4js-read-only/index.html
+
+From there, you can follow the links to the various sample pages.
