@@ -1,0 +1,27 @@
+#summary This page describes the organization of the directories that make up the source tree of the xmla4js project.
+#labels Phase-Implementation
+
+= Introduction =
+
+The xmla4js project is maintained using subversion. This document explains the contents of the svn trunk.
+
+
+= Details =
+The xmla4js trunk contains the following directories:
+ * doc
+ * js
+ * samples
+
+The directories and their contents are described below:
+
+== doc ==
+
+Contains all documention. In the near future, this will contain the API documentation for the Xmla.js library.
+
+== js ==
+
+The js directory contains javascript libraries. Javascript libraries are intended to be included in web pages to allow the webapplications to use XML/A services. Currently, it only  contains the Xmla.js library, which implements basic XML/A capabilities.
+
+== samples ==
+
+The samples directory contains mainly HTML pages that illustrate the usage of the Xmla.js library. The samples double as aid for testing and debugging the Xmla.js library.
