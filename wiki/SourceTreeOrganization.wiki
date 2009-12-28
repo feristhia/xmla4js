@@ -8,20 +8,35 @@ The xmla4js project is maintained using subversion. This document explains the c
 
 = Details =
 The xmla4js trunk contains the following directories:
+ * build
+ * css
  * doc
  * js
  * samples
+ * src
 
 The directories and their contents are described below:
+
+== build ==
+
+Contains all build scripts. These are used to create YUI compressed / Google closure compiled versions of  Xmla.js. Also contains build script for the API documentation.
 
 == doc ==
 
 Contains all documention. In the near future, this will contain the API documentation for the Xmla.js library.
 
+== css ==
+
+Contains generic css to format sample pages.
+
 == js ==
 
-The js directory contains javascript libraries. Javascript libraries are intended to be included in web pages to allow the webapplications to use XML/A services. Currently, it only  contains the Xmla.js library, which implements basic XML/A capabilities.
+The js directory contains javascript libraries. Javascript libraries are intended to be included in web pages to allow the webapplications to use XML/A services.
 
 == samples ==
 
 The samples directory contains mainly HTML pages that illustrate the usage of the Xmla.js library. The samples double as aid for testing and debugging the Xmla.js library.
+
+== src ==
+
+The src directory contains javascript source files (including documentation and license)
