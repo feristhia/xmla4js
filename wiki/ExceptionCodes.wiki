@@ -1,0 +1,10 @@
+This page lists all xmla4js defined error and warning codes.
+
+= Error and Warning codes =
+
+This pages lists all xmla4js defined error codes and warnings.
+
+
+= Details =
+
+  * -1 - Missing Request Type
