@@ -7,4 +7,4 @@ This pages lists all xmla4js defined error codes and warnings.
 
 = Details =
 
-  * -1 - Missing Request Type
+===== -1 Missing Request Type =====
