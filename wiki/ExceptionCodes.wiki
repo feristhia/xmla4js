@@ -1,4 +1,4 @@
-This page lists all xmla4js defined error and warning codes.
+#This page lists all xmla4js defined error and warning codes.
 
 = Error and Warning codes =
 
