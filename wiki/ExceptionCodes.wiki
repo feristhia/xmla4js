@@ -24,3 +24,5 @@ Registering a listener failed because no handler was specified, or the specified
 A response was received from the server, but xmla4js could not parse it.
 ===== -9 Invalid Field =====
 A particular field was requested from a Xmla.Rowset, but the field does not exist.
+===== -10 HTTP Error =====
+Exception code indicating a general XMLHttpRequest error.
