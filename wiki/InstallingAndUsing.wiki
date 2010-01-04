@@ -13,9 +13,18 @@ For other XML/A providers, the steps to get started with xmla4js are almost cert
 
 = Details =
 
+== Setting up Xmla4js on the Pentaho BI server ==
 First, you need to open a shell and change the current working directory to the tomcat/webapps directory located in the home directory of the Pentaho BI server. Suppose you unpacked the compressed archive of the Pentaho BI server to /opt/pentaho, then you should cd to /opt/pentaho/biserver-ce/tomcat/webapps.
 
-In that directory, do a subversion checkout of the xmla4js google code project. The command line to checkout the project can be found here:
+=== With the .zip archive ===
+One way of getting xmla4js is by downloading the xmla4js.zip archive from the downloads page. For your convenience the address to the download page is included below: 
+
+http://code.google.com/p/xmla4js/downloads/detail?name=xmla4js.zip
+
+After downloading, unzip the archive, and copy the xmla4js directory (and its contents) to the webapps directory.
+
+=== With subversion checkout ===
+Another way of getting xmla4js is by doing a subversion checkout in the webapps directory. The command line to checkout the project can be found here:
 
     http://code.google.com/p/xmla4js/source/checkout
 
@@ -23,7 +32,11 @@ For your convenience, the command-line is included here too:
 
     svn checkout http://xmla4js.googlecode.com/svn/trunk/ xmla4js-read-only
 
-This will create a xmla4js-read-only directory in tomcat's webapps directory. After completing the checkout, you should be able to navigate your browser to:
+This will create a xmla4js-read-only directory in tomcat's webapps directory.
+
+== Next steps ==
+
+After placing xmla4js on your system,you should be able to navigate your browser to:
 
     http://localhost:8080/xmla4js-read-only/index.html
 
