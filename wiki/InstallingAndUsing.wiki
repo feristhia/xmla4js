@@ -34,10 +34,99 @@ For your convenience, the command-line is included here too:
 
 This will create a xmla4js-read-only directory in tomcat's webapps directory.
 
+== Setting Xmla4js in Apache http server to connect to a remote XML/A server ==
+
+It's possible to use Xmla4js to access remote XML/A servers. In this case, Xmla4js will be server from a regular HTTP server like Apache, but send SOAP requests to an externam XML/A server. 
+
+In order to make this kind of setup work, the regular HTTP server (the one where Xmla4js is deployed) has to act as a proxy for the remote XML/A server. That's because the XMLHttpRequest object used by Xmla4js is restricted from doing cross-domain requests. This is not a property of Xmla4js but a general security measure (see also http://developer.yahoo.com/javascript/howto-proxy.html).
+
+Here's a sample configuration file for Apache:
+{{{
+#
+# make D:\Projects\xmla4js accessible from the webhost as http://webhost/xmla4js
+#
+Alias /xmla4js     "D:\Projects\xmla4js"
+
+#
+# cofigure access to the resources in the xmla4js installation directory
+#
+<Directory "D:\Projects\xmla4js">
+  Options All
+  AllowOverride All
+  Order allow,deny
+  Allow from all
+</Directory>
+
+ProxyRequests Off
+
+#
+# set up access to the Palo XML/A server
+#
+<Location /palo>
+  ProxyPass http://localhost:4242/xmla/
+  ProxyPassReverse http://localhost:4242/xmla/
+  SetEnv proxy-chain-auth
+</Location>
+
+#
+# set up access to the Pentaho XML/A server
+#
+<Proxy /pentaho>
+  Order deny,allow
+  Allow from all
+  ProxyPass http://localhost:8080/pentaho
+  ProxyPassReverse http://localhost:8080/pentaho
+  SetEnv proxy-chain-auth
+</Proxy>
+}}}
+When using this type of setup for pentaho, there is one more additional step to take. As per the XML/A spec, an initial request to discover XML/A datasources may return a URL which should be used for subsequent and more specific XML/A requests. In the case of Pentaho, the XML/A datasource is configured in biserver-ce/pentaho-solutions/system/olap/datasources.xml.
+
+This is what datasources.xml typically looks like:
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<DataSources>
+  <DataSource>
+    <DataSourceName>Provider=Mondrian;DataSource=Pentaho</DataSourceName>
+    <DataSourceDescription>Pentaho BI Platform Datasources</DataSourceDescription>
+    <URL>http://localhost:8080/pentaho/Xmla?userid=joe&amp;password=password</URL>
+    <DataSourceInfo>Provider=mondrian</DataSourceInfo>
+    <ProviderName>PentahoXMLA</ProviderName>
+    <ProviderType>MDP</ProviderType>
+    <AuthenticationMode>Unauthenticated</AuthenticationMode>
+    <Catalogs>
+      <Catalog name="SteelWheels">
+        <DataSourceInfo>Provider=mondrian;DataSource=SampleData</DataSourceInfo>
+        <Definition>solution:steel-wheels/analysis/steelwheels.mondrian.xml</Definition>
+      </Catalog>
+      <Catalog name="SampleData">
+        <DataSourceInfo>Provider=mondrian;DataSource=SampleData</DataSourceInfo>
+        <Definition>solution:steel-wheels/analysis/SampleData.mondrian.xml</Definition>
+      </Catalog>
+    </Catalogs>
+  </DataSource>
+</DataSources>
+}}}
+
+As you can see, the `<URL>` element points to the wrong location. This can be easily fixed simply by removeing the text between the `<URL>` tags, effectively replacing:
+{{{
+    <URL>http://localhost:8080/pentaho/Xmla?userid=joe&amp;password=password</URL>
+}}}
+with
+{{{
+    <URL></URL>
+}}}
+
 == Next steps ==
 
-After placing xmla4js on your system,you should be able to navigate your browser to:
+After placing xmla4js on your system,you should be able to navigate your browser to the local Xmla4js homepage. If you set Xmla4js up inside your pentaho BI server according to the instructions above, you should be able to find it here:
 
-    http://localhost:8080/xmla4js-read-only/index.html
+    http://localhost:8080/xmla4js-read-only/index.html (if you used a subversion checkout)
+    http://localhost:8080/xmla4js/index.html (if you downloaded the zip and unpacked to xmla4js)
+
+If you set up Xmla4js inside your regular HTTP server via a proxy, you should be able to find it here:
+
+    http://localhost/xmla4js-read-only/index.html (if you used a subversion checkout)
+    http://localhost/xmla4js/index.html (if you downloaded the zip and unpacked to xmla4js)
+
 
 From there, you can follow the links to the API documentation and various sample pages.
