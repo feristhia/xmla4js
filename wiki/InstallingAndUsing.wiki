@@ -21,7 +21,7 @@ To work with Xmla4js, you can either:<ul>
 == Running Xmla4js as a Pentaho BI Server plugin ==
 Xml4js now sports a <a href="http://wiki.pentaho.com/display/ServerDoc2x/Developing+Plugins">Pentaho BI Server plugin</a> (as of <a href="http://code.google.com/p/xmla4js/source/detail?r=102">revision 102</a>). The plugin creates a Xmla4js menu item in the tools menu of the Pentaho user console, which simply opens the Xmla4js index page inside the user console. This makes it very easy to try out the Xmla4js samples. Note that the plugin is intended primarily for developers: Xml4js proper has little to offer to end users.
 
-== Setting up a separate Xmla4js web application ==
+== Running Xmla4js as web application next to Pentaho BI Server ==
 The steps described on this page assume you have downloaded and unpacked the Pentaho BI server on your local system. The remainder of this page will assume that the Pentaho BI Server is started and has a default configuration. You can check this by navigating to http://localhost:8080/ with your webbrowser. This should redirect you to http://localhost:8080/pentaho, and show you the welcome page with a login button.
 
 First, you need to open a shell and change the current working directory to the tomcat/webapps directory located in the home directory of the Pentaho BI server. Suppose you unpacked the compressed archive of the Pentaho BI server to `/opt/pentaho`, then you should cd to `/opt/pentaho/biserver-ce/tomcat/webapps`.
@@ -29,8 +29,7 @@ First, you need to open a shell and change the current working directory to the 
 Now, it's simply a matter of copying the Xmla4js home directory (and its contents) into the webapps directory
 
 == Setting Xmla4js in Apache http server to connect to a remote XML/A server ==
-
-It's possible to use Xmla4js to access remote XML/A servers. In this case, Xmla4js will be server from a regular HTTP server like Apache, but send SOAP requests to an externam XML/A server. 
+It's possible to work around the ame origin policy and use Xmla4js to access remote XML/A servers. In this case, Xmla4js will be served from a regular HTTP server like Apache, but send SOAP requests to an external XML/A server. 
 
 In order to make this kind of setup work, the regular HTTP server (the one where Xmla4js is deployed) has to act as a proxy for the remote XML/A server. That's because the XMLHttpRequest object used by Xmla4js is restricted from doing cross-domain requests. This is not a property of Xmla4js but a general security measure (see also http://developer.yahoo.com/javascript/howto-proxy.html).
 
