@@ -12,29 +12,21 @@ Effectively this means that webpages that want to use Xmla.js must reside on the
 Currently, this page provides tips to start using Xmla4js with the Open Source <a href="http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/">Pentaho BI Server</a>. For other XML/A providers, the steps to get started with xmla4js are almost certainly similar, although details such as specific paths and urls are likely to differ. You are encouraged to contribute feedback and information on how to set up Xmla4js on other XML/A servers.
 
 = Details =
+There are several options to set up Xmla4js. You can either use a stable version, or a development version. You can install Xmla4js on the same server as where your XML/A server resides, or you can install it on some webserver that you configure as a proxy for one or more remote XML/A servers.
+== Xmla4.js distributions: .zip or subversion checkout ==
+To work with Xmla4js, you can either:<ul>
+<li>Download a .zip archive from the <a href="http://code.google.com/p/xmla4js/downloads/list">downloads section</a>. Unzipping the archive yields the Xmla4js home directory. Use this option if you want to simple use a stable version of Xmla4js.</li>
+<li>Checkout the subversion repository from the google code project page according to the <a href="http://code.google.com/p/xmla4js/source/checkout">instructions</a> of the source section of the project. In this case the checked out directory is the Xmla4js home directory. Use this option to get and stay up to date with the latest (development) version of Xmla4js.</li>
+</ul>
+== Running Xmla4js as a Pentaho BI Server plugin ==
+Xml4js now sports a <a href="http://wiki.pentaho.com/display/ServerDoc2x/Developing+Plugins">Pentaho BI Server plugin</a> (as of <a href="http://code.google.com/p/xmla4js/source/detail?r=102">revision 102</a>). The plugin creates a Xmla4js menu item in the tools menu of the Pentaho user console, which simply opens the Xmla4js index page inside the user console. This makes it very easy to try out the Xmla4js samples. Note that the plugin is intended primarily for developers: Xml4js proper has little to offer to end users.
 
-== Setting up Xmla4js as a separate webapp next to the Pentaho BI server ==
+== Setting up a separate Xmla4js web application ==
 The steps described on this page assume you have downloaded and unpacked the Pentaho BI server on your local system. The remainder of this page will assume that the Pentaho BI Server is started and has a default configuration. You can check this by navigating to http://localhost:8080/ with your webbrowser. This should redirect you to http://localhost:8080/pentaho, and show you the welcome page with a login button.
 
-First, you need to open a shell and change the current working directory to the tomcat/webapps directory located in the home directory of the Pentaho BI server. Suppose you unpacked the compressed archive of the Pentaho BI server to /opt/pentaho, then you should cd to /opt/pentaho/biserver-ce/tomcat/webapps.
+First, you need to open a shell and change the current working directory to the tomcat/webapps directory located in the home directory of the Pentaho BI server. Suppose you unpacked the compressed archive of the Pentaho BI server to `/opt/pentaho`, then you should cd to `/opt/pentaho/biserver-ce/tomcat/webapps`.
 
-=== With the .zip archive ===
-One way of getting xmla4js is by downloading the xmla4js.zip archive from the downloads page. For your convenience the address to the download page is included below: 
-
-http://code.google.com/p/xmla4js/downloads/detail?name=xmla4js.zip
-
-After downloading, unzip the archive, and copy the xmla4js directory (and its contents) to the webapps directory.
-
-=== With subversion checkout ===
-Another way of getting xmla4js is by doing a subversion checkout in the webapps directory. The command line to checkout the project can be found here:
-
-    http://code.google.com/p/xmla4js/source/checkout
-
-For your convenience, the command-line is included here too:
-
-    svn checkout http://xmla4js.googlecode.com/svn/trunk/ xmla4js-read-only
-
-This will create a xmla4js-read-only directory in tomcat's webapps directory.
+Now, it's simply a matter of copying the Xmla4js home directory (and its contents) into the webapps directory
 
 == Setting Xmla4js in Apache http server to connect to a remote XML/A server ==
 
@@ -50,7 +42,7 @@ Here's a sample configuration file for Apache:
 Alias /xmla4js     "D:\Projects\xmla4js"
 
 #
-# cofigure access to the resources in the xmla4js installation directory
+# cofigure access to the resources in the xmla4js home directory
 #
 <Directory "D:\Projects\xmla4js">
   Options All
@@ -81,7 +73,7 @@ ProxyRequests Off
   SetEnv proxy-chain-auth
 </Proxy>
 }}}
-When using this type of setup for pentaho, there is one more additional step to take. As per the XML/A spec, an initial request to discover XML/A datasources may return a URL which should be used for subsequent and more specific XML/A requests. In the case of Pentaho, the XML/A datasource is configured in biserver-ce/pentaho-solutions/system/olap/datasources.xml.
+When using this type of setup with the Pentaho BI Server, there is one more additional step to take. As per the XML/A spec, an initial request to discover XML/A datasources may return a URL which should be used for subsequent and more specific XML/A requests. In the case of Pentaho, the XML/A datasource is configured in `biserver-ce/pentaho-solutions/system/olap/datasources.xml`.
 
 This is what datasources.xml typically looks like:
 {{{
@@ -109,7 +101,7 @@ This is what datasources.xml typically looks like:
 </DataSources>
 }}}
 
-As you can see, the `<URL>` element points to the wrong location. This can be easily fixed simply by removeing the text between the `<URL>` tags, effectively replacing:
+As you can see, the `<URL>` element points to the wrong location. This can be easily fixed simply by removing the text between the `<URL>` tags, effectively replacing:
 {{{
     <URL>http://localhost:8080/pentaho/Xmla?userid=joe&amp;password=password</URL>
 }}}
