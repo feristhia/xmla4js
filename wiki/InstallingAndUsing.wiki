@@ -21,6 +21,9 @@ To work with Xmla4js, you can either:<ul>
 == Running Xmla4js as a Pentaho BI Server plugin ==
 Xml4js now sports a <a href="http://wiki.pentaho.com/display/ServerDoc2x/Developing+Plugins">Pentaho BI Server plugin</a> (as of <a href="http://code.google.com/p/xmla4js/source/detail?r=102">revision 102</a>). The plugin creates a Xmla4js menu item in the tools menu of the Pentaho user console, which simply opens the Xmla4js index page inside the user console. This makes it very easy to try out the Xmla4js samples. Note that the plugin is intended primarily for developers: Xml4js proper has little to offer to end users.
 
+Id you want to work with the development version, simply checkout the xmla4js repository into the `system` solution in your pentaho-solutions folder (which is right beneath the home of the bi-server). The current download version is of r76, and does not yet include the plugin. The plugin will become available as a download soon. You can easily make a plugin of the xmla4js stable version by copying the <a href="http://code.google.com/p/xmla4js/source/browse/trunk/plugin.xml">plugin.xml</a> file into the xmla4js home directory.
+
+You will need to restart the Pentaho BI Server in order for the plugin to be loaded.  
 == Running Xmla4js as web application next to Pentaho BI Server ==
 The steps described on this page assume you have downloaded and unpacked the Pentaho BI server on your local system. The remainder of this page will assume that the Pentaho BI Server is started and has a default configuration. You can check this by navigating to http://localhost:8080/ with your webbrowser. This should redirect you to http://localhost:8080/pentaho, and show you the welcome page with a login button.
 
