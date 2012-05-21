@@ -12,6 +12,16 @@ It's possible to work around the ame origin policy and use Xmla4js to access rem
 
 In order to make this kind of setup work, the regular HTTP server (the one where Xmla4js is deployed) has to act as a proxy for the remote XML/A server. That's because the XMLHttpRequest object used by Xmla4js is restricted from doing cross-domain requests. This is not a property of Xmla4js but a general security measure (see also http://developer.yahoo.com/javascript/howto-proxy.html).
 
+==Setting up a regular HTTP proxy==
+It's most straightforward to set up a regular HTTP proxy. This simply passes http requests to apache on to the XML/A server. 
+
+In order to use this kind of setup, you'll need to install the proxy and proxy_http modules. On ubuntu, you can get them with:
+
+{{{
+$ sudo a2enmod proxy
+$ sudo a2enmod proxy_http
+}}}
+   
 Here's a sample configuration file for Apache httpd:
 {{{
 #
@@ -51,3 +61,20 @@ ProxyRequests Off
   SetEnv proxy-chain-auth
 </Proxy>
 }}}
+
+==Setting up a AJP proxy to Tomcat==
+While the regular HTTP proxy works just fine, there is a better option if you're XML/A server is running on Apache tomcat. Apache tomcat supperts the AJP protocol. This is a binary protocol which is more efficient than plain HTTP. 
+
+(Tomcat is used by default server by the Pentaho BI Server, and it's also a common server to use for running Mondrian standalone.)
+
+To use AJP, you'll need to install the AJP proxy module:
+{{{
+$ sudo a2enmod proxy
+$ sudo a2enmod proxy_ajp
+}}}
+
+To setup the ajp proxy, refer to this example configuration:
+{{{
+    ProxyPass /pentaho ajp://localhost:8009/pentaho
+    ProxyPassReverse /pentaho ajp://localhost:8009/pentaho
+}}} 
