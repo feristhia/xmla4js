@@ -12,7 +12,7 @@ It's possible to work around the ame origin policy and use Xmla4js to access rem
 
 In order to make this kind of setup work, the regular HTTP server (the one where Xmla4js is deployed) has to act as a proxy for the remote XML/A server. That's because the XMLHttpRequest object used by Xmla4js is restricted from doing cross-domain requests. This is not a property of Xmla4js but a general security measure (see also http://developer.yahoo.com/javascript/howto-proxy.html).
 
-Here's a sample configuration file for Apache:
+Here's a sample configuration file for Apache httpd:
 {{{
 #
 # make D:\Projects\xmla4js accessible from the webhost as http://webhost/xmla4js
