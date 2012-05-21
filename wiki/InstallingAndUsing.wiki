@@ -20,7 +20,7 @@ After placing xmla4js on your system,you should be able to navigate your browser
     http://localhost:8080/xmla4js-read-only/index.html (if you used a subversion checkout)
     http://localhost:8080/xmla4js/index.html (if you downloaded the zip and unpacked to xmla4js)
 
-If you set up Xmla4js inside your regular HTTP server via a proxy, you should be able to find it here:
+If you set up Xmla4js inside your regular HTTP server via a proxy (see [SettingUpAnApacheProxy]), you should be able to find it here:
 
     http://localhost/xmla4js-read-only/index.html (if you used a subversion checkout)
     http://localhost/xmla4js/index.html (if you downloaded the zip and unpacked to xmla4js)
